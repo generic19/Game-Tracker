@@ -12,7 +12,7 @@ class LeaguesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         switch sport {
             case .football:
                 navigationItem.title = "Football Leagues"
