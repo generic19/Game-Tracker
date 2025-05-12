@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '15.0'
 
 target 'Game Tracker' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,7 +7,7 @@ target 'Game Tracker' do
 
   # Pods for Game Tracker
   pod 'SDWebImage', '~> 5.0'
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 5.8'
   pod 'lottie-ios'
   pod 'ReachabilitySwift'
   pod 'Shimmer'
