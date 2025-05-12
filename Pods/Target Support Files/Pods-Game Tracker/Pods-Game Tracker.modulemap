@@ -1,0 +1,6 @@
+framework module Pods_Game_Tracker {
+  umbrella header "Pods-Game Tracker-umbrella.h"
+
+  export *
+  module * { export * }
+}
