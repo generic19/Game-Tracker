@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct League {
+struct League: Model {
     let sport: Sport
     let id: Int
     let name: String

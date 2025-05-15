@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sport {
+enum Sport: String {
     case football
     case basketball
     case cricket
