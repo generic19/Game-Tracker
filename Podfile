@@ -11,6 +11,7 @@ target 'Game Tracker' do
   pod 'lottie-ios'
   pod 'ReachabilitySwift'
   pod 'Shimmer'
+  pod 'Swinject'
 
   target 'Game TrackerTests' do
     inherit! :search_paths
