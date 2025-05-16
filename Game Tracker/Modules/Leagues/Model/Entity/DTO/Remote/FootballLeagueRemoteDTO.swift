@@ -39,6 +39,7 @@ struct FootballLeagueRemoteDTO: RemoteDTO {
             categoryName: countryName,
             logo: logo,
             categoryLogo: categoryLogo,
+            isFavorite: false,
         )
     }
 }

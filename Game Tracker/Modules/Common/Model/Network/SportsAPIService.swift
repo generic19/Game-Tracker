@@ -10,8 +10,7 @@ protocol SportsAPIService {
     func fetchLeagues<T: RemoteDTO>(
         as type: T.Type,
         sport: Sport,
-        completionHandler: @escaping (Result<[T], Error>) -> Void
-    )
+    ) -> Result<[any ModelConvertible], Error>
     
     func fetchEvents<T: RemoteDTO>(
         as type: T.Type,
@@ -19,20 +18,17 @@ protocol SportsAPIService {
         leagueId: Int,
         from startDate: Date,
         to endDate: Date,
-        completionHandler: @escaping (Result<[T], Error>) -> Void
-    )
+    ) -> Result<[any ModelConvertible], Error>
     
     func fetchTeams<T: RemoteDTO>(
         as type: T.Type,
         sport: Sport,
         leagueId: Int,
-        completionHandler: @escaping (Result<[T], Error>) -> Void
-    )
+    ) -> Result<[any ModelConvertible], Error>
     
     func fetchTeam<T: RemoteDTO>(
         as type: T.Type,
         sport: Sport,
         teamId: Int,
-        completionHandler: @escaping (Result<[T], Error>) -> Void
-    )
+    ) -> Result<[any ModelConvertible], Error>
 }

@@ -25,7 +25,8 @@ struct CricketLeagueRemoteDTO: RemoteDTO {
             name: leagueName,
             categoryName: leagueYear,
             logo: nil,
-            categoryLogo: nil
+            categoryLogo: nil,
+            isFavorite: false
         )
     }
 }

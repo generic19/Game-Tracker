@@ -13,4 +13,5 @@ struct League: Model {
     let categoryName: String?
     let logo: URL?
     let categoryLogo: URL?
+    var isFavorite: Bool
 }

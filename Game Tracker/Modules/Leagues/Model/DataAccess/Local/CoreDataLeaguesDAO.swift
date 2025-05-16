@@ -1,0 +1,64 @@
+//
+//  CoreDataLeaguesDAO.swift
+//  Game Tracker
+//
+//  Created by Basel Alasadi on 16/05/2025.
+//
+
+import CoreData
+
+class CoreDataLeaguesDAO: LeaguesDAO {
+    let viewContext: NSManagedObjectContext
+    
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
+    }
+    
+    func getFavorites() -> Result<[LeagueEntity], Error> {
+        let request = LeagueEntity.fetchRequest()
+        
+        do {
+            let leagues = try viewContext.fetch(request)
+            return .success(leagues)
+        } catch let error {
+            return .failure(error)
+        }
+    }
+    
+    func setFavorite(league: League) -> Result<LeagueEntity, Error> {
+        let description = NSEntityDescription.entity(forEntityName: "LeagueEntity", in: viewContext)!
+        
+        description.setValue(league.sport, forKey: "sport")
+        description.setValue(league.id, forKey: "id")
+        description.setValue(league.name, forKey: "name")
+        description.setValue(league.categoryName, forKey: "categoryName")
+        description.setValue(league.logo, forKey: "logo")
+        description.setValue(league.categoryLogo, forKey: "categoryLogo")
+        
+        let entity = LeagueEntity(entity: description, insertInto: viewContext)
+        
+        do {
+            try viewContext.save()
+            return .success(entity)
+        } catch let error {
+            return .failure(error)
+        }
+    }
+    
+    func unsetFavorite(leagueById leagueId: Int64) -> Result<Void, Error> {
+        let request = LeagueEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", leagueId)
+        request.fetchLimit = 1
+        
+        do {
+            if let league = try viewContext.fetch(request).first {
+                viewContext.delete(league)
+            }
+            
+            return .success(())
+        }
+        catch let error {
+            return .failure(error)
+        }
+    }
+}

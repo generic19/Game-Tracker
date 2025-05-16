@@ -25,7 +25,8 @@ struct TennisLeagueRemoteDTO: RemoteDTO {
             name: leagueName,
             categoryName: countryName,
             logo: nil,
-            categoryLogo: nil
+            categoryLogo: nil,
+            isFavorite: false,
         )
     }
 }

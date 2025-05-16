@@ -13,68 +13,85 @@ private struct APISuccessResponse<T: RemoteDTO>: Decodable & Sendable {
     let result: [T]
 }
 
-private let API_BASE = URL(string: "https://apiv2.allsportsapi.com")!
-    .appending(queryItems: [URLQueryItem(name: "APIkey", value: SPORTS_API_KEY)])
+private let API_BASE = URL(string: "https://apiv2.allsportsapi.com")!.with(params: [
+    "APIkey": SPORTS_API_KEY
+])
 
 private let dateFormatter = DateFormatter.isoDate()
 
 class AlamofireSportsAPIService: SportsAPIService {
-    func fetchLeagues<T: RemoteDTO>(as type: T.Type, sport: Sport, completionHandler: @escaping (Result<[T], Error>) -> Void) {
-        let url = API_BASE
-            .appending(component: sport.rawValue)
-            .appending(queryItems: [
-                URLQueryItem(name: "met", value: "Leagues"),
-            ])
+    
+    func fetchLeagues<T: RemoteDTO>(
+        as type: T.Type,
+        sport: Sport
+    ) -> Result<[any ModelConvertible], Error> {
+        let url = API_BASE.with(path: sport.rawValue, params: [
+            "met": "Leagues"
+        ])
         
-        fetch(as: type, url: url, completionHandler: completionHandler)
+        return fetch(as: type, url: url)
     }
     
-    func fetchEvents<T: RemoteDTO>(as type: T.Type, sport: Sport, leagueId: Int, from startDate: Date, to endDate: Date, completionHandler: @escaping (Result<[T], Error>) -> Void) {
-        let url = API_BASE
-            .appending(component: sport.rawValue)
-            .appending(queryItems: [
-                URLQueryItem(name: "met", value: "Fixtures"),
-                URLQueryItem(name: "from", value: dateFormatter.string(from: startDate)),
-                URLQueryItem(name: "to", value: dateFormatter.string(from: startDate)),
-                URLQueryItem(name: "timezone", value: "UTC"),
-                URLQueryItem(name: "leagueId", value: "\(leagueId)"),
-            ])
+    func fetchEvents<T: RemoteDTO>(
+        as type: T.Type,
+        sport: Sport,
+        leagueId: Int,
+        from startDate: Date,
+        to endDate: Date
+    ) -> Result<[any ModelConvertible], Error> {
+        let url = API_BASE.with(path: sport.rawValue, params: [
+            "met": "Fixtures",
+            "from": dateFormatter.string(from: startDate),
+            "to": dateFormatter.string(from: startDate),
+            "timezone": "UTC",
+            "leagueId": "\(leagueId)",
+        ])
         
-        fetch(as: type, url: url, completionHandler: completionHandler)
+        return fetch(as: type, url: url)
     }
     
-    func fetchTeams<T: RemoteDTO>(as type: T.Type, sport: Sport, leagueId: Int, completionHandler: @escaping (Result<[T], Error>) -> Void) {
-        let url = API_BASE
-            .appending(component: sport.rawValue)
-            .appending(queryItems: [
-                URLQueryItem(name: "met", value: "Teams"),
-                URLQueryItem(name: "leagueId", value: "\(leagueId)"),
-            ])
+    func fetchTeams<T: RemoteDTO>(
+        as type: T.Type,
+        sport: Sport,
+        leagueId: Int
+    ) -> Result<[any ModelConvertible], Error> {
+        let url = API_BASE.with(path: sport.rawValue, params: [
+            "met": "Teams",
+            "leagueId": "\(leagueId)",
+        ])
         
-        fetch(as: type, url: url, completionHandler: completionHandler)
+        return fetch(as: type, url: url)
     }
     
-    func fetchTeam<T: RemoteDTO>(as type: T.Type, sport: Sport, teamId: Int, completionHandler: @escaping (Result<[T], Error>) -> Void) {
-        let url = API_BASE
-            .appending(component: sport.rawValue)
-            .appending(queryItems: [
-                URLQueryItem(name: "met", value: "Teams"),
-                URLQueryItem(name: "teamId", value: "\(teamId)"),
-            ])
+    func fetchTeam<T: RemoteDTO>(
+        as type: T.Type,
+        sport: Sport,
+        teamId: Int
+    ) -> Result<[any ModelConvertible], Error> {
+        let url = API_BASE.with(path: sport.rawValue, params: [
+            "met": "Teams",
+            "teamId": "\(teamId)",
+        ])
         
-        fetch(as: type, url: url, completionHandler: completionHandler)
+        return fetch(as: type, url: url)
     }
     
-    private func fetch<T: RemoteDTO>(as type: T.Type, url: URL, completionHandler: @escaping (Result<[T], Error>) -> Void) {
+    private func fetch<T: RemoteDTO>(as type: T.Type, url: URL) -> Result<[any ModelConvertible], Error> {
+        var fetchResult: Result<[any ModelConvertible], Error>!
+        let semaphore = DispatchSemaphore(value: 0)
+        
         AF.request(url).responseDecodable(of: APISuccessResponse<T>.self) { response in
             switch response.result {
-                case .success(let result):
-                    completionHandler(Result.success(result.result))
+                case .success(let response):
+                    fetchResult = .success(response.result)
                     
                 case .failure(let error):
-                    completionHandler(Result.failure(error))
+                    fetchResult = .failure(error)
             }
         }
+        
+        semaphore.wait()
+        return fetchResult
     }
 }
 
@@ -86,3 +103,15 @@ extension DateFormatter {
     }
 }
 
+extension URL {
+    func with(path: String? = nil, params: [String: String]) -> URL {
+        let queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        var url = self.appending(queryItems: queryItems)
+        if let path = path {
+            url = url.appending(path: path)
+        }
+        
+        return url
+    }
+}
