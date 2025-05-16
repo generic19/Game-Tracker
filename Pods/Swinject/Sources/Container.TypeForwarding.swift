@@ -25,9 +25,7 @@ extension Container {
             name: name,
             option: nil
         )
-        syncIfEnabled {
-            services[key] = service
-            behaviors.forEach { $0.container(self, didRegisterType: type, toService: service, withName: name) }
-        }
+        services[key] = service
+        behaviors.forEach { $0.container(self, didRegisterType: type, toService: service, withName: name) }
     }
 }

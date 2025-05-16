@@ -12,7 +12,8 @@ target 'Game Tracker' do
   pod 'ReachabilitySwift'
   pod 'Shimmer'
   pod 'Swinject'
-
+  pod 'SwinjectStoryboard'
+  
   target 'Game TrackerTests' do
     inherit! :search_paths
     # Pods for testing

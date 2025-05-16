@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4681E8F85B0B879322AE3D0BC045FA8E"
-               BuildableName = "Swinject.bundle"
-               BlueprintName = "Swinject-Swinject"
+               BlueprintIdentifier = "65AB6C22153B56B1A56B06A3553EB5AA"
+               BuildableName = "SwinjectStoryboard.framework"
+               BlueprintName = "SwinjectStoryboard"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

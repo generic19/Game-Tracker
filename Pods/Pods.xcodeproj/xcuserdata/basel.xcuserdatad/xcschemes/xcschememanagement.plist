@@ -54,12 +54,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Swinject-Swinject.xcscheme</key>
+		<key>Swinject.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Swinject.xcscheme</key>
+		<key>SwinjectStoryboard.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

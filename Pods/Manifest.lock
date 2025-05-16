@@ -6,7 +6,9 @@ PODS:
     - SDWebImage/Core (= 5.21.0)
   - SDWebImage/Core (5.21.0)
   - Shimmer (1.0.2)
-  - Swinject (2.9.1)
+  - Swinject (2.7.1)
+  - SwinjectStoryboard (2.2.2):
+    - Swinject (~> 2.7.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.8)
@@ -15,6 +17,7 @@ DEPENDENCIES:
   - SDWebImage (~> 5.0)
   - Shimmer
   - Swinject
+  - SwinjectStoryboard
 
 SPEC REPOS:
   trunk:
@@ -24,6 +27,7 @@ SPEC REPOS:
     - SDWebImage
     - Shimmer
     - Swinject
+    - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
@@ -31,8 +35,9 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
-  Swinject: a827d508c6270da03ec74e558e728917a888fa9b
+  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
+  SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
 
-PODFILE CHECKSUM: 3b68a976e6b69ba1aebe8ed44efbc1a5106958a7
+PODFILE CHECKSUM: 9fe80ec8810547382081f665b09f5abd5cd873b1
 
 COCOAPODS: 1.16.2
