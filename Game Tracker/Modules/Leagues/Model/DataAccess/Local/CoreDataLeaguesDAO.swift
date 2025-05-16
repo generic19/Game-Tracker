@@ -14,8 +14,12 @@ class CoreDataLeaguesDAO: LeaguesDAO {
         self.viewContext = viewContext
     }
     
-    func getFavorites() -> Result<[LeagueEntity], Error> {
+    func getFavorites(onlyForSport sport: Sport?) -> Result<[LeagueEntity], Error> {
         let request = LeagueEntity.fetchRequest()
+        
+        if let sportRaw = sport?.rawValue {
+            request.predicate = NSPredicate(format: "sportRaw = %@", sportRaw)
+        }
         
         do {
             let leagues = try viewContext.fetch(request)

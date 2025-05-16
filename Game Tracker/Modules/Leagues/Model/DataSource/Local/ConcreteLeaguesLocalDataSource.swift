@@ -14,8 +14,12 @@ class ConcreteLeaguesLocalDataSource: LeaguesLocalDataSource {
         self.dao = dao
     }
     
-    func getFavoriteLeagues() -> Result<[League], Error> {
-        let result = dao.getFavorites()
+    func getFavoriteLeagues() -> Result<[League], any Error> {
+        return getFavoriteLeagues(onlyForSport: nil)
+    }
+    
+    func getFavoriteLeagues(onlyForSport sport: Sport?) -> Result<[League], Error> {
+        let result = dao.getFavorites(onlyForSport: sport)
         
         switch result {
             case .success(let entities):

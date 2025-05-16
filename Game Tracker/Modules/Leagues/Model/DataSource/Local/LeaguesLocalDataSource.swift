@@ -7,6 +7,7 @@
 
 protocol LeaguesLocalDataSource {
     func getFavoriteLeagues() -> Result<[League], Error>
+    func getFavoriteLeagues(onlyForSport sport: Sport?) -> Result<[League], Error>
     func setFavorite(league: League) -> Result<League, Error>
     func unsetFavorite(league: League) -> Result<League, Error>
 }

@@ -6,7 +6,7 @@
 //
 
 protocol LeaguesDAO {
-    func getFavorites() -> Result<[LeagueEntity], Error>
+    func getFavorites(onlyForSport sport: Sport?) -> Result<[LeagueEntity], Error>
     func setFavorite(league: League) -> Result<LeagueEntity, Error>
     func unsetFavorite(leagueById leagueId: Int64) -> Result<Void, Error>
 }
