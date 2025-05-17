@@ -51,12 +51,13 @@ class CoreDataLeaguesDAO: LeaguesDAO {
     
     func unsetFavorite(leagueById leagueId: Int64) -> Result<Void, Error> {
         let request = LeagueEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", leagueId)
+        request.predicate = NSPredicate(format: "id == %d", leagueId)
         request.fetchLimit = 1
         
         do {
             if let league = try viewContext.fetch(request).first {
                 viewContext.delete(league)
+                try viewContext.save()
             }
             
             return .success(())

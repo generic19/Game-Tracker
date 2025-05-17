@@ -18,6 +18,8 @@ private let sports: [(Sport, String, String)] = [
 
 class SportsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var router: SportsRouter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -45,8 +47,7 @@ class SportsCollectionViewController: UICollectionViewController, UICollectionVi
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(identifier: "leagues") as! LeaguesTableViewController
-        controller.sport = sports[indexPath.row].0
-        navigationController?.pushViewController(controller, animated: true)
+        let sport = sports[indexPath.row].0
+        router.navigateToLeagues(sport: sport)
     }
 }

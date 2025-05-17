@@ -15,6 +15,6 @@ enum LeaguesResult {
 
 protocol LeaguesRepository {
     func getLeagues(sport: Sport, completionHandler: @escaping (LeaguesResult) -> Void)
-    func getFavoriteLeagues(sport: Sport, completionHandler: @escaping (Result<[League], Error>) -> Void)
+    func getFavoriteLeagues(completionHandler: @escaping (Result<[League], Error>) -> Void)
     func setFavorite(league: League, _ favorite: Bool, completionHandler: @escaping (Result<League, Error>) -> Void)
 }

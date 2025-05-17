@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct League: Model {
+struct League: Model, Equatable {
     let sport: Sport
     let id: Int
     let name: String
@@ -14,4 +14,8 @@ struct League: Model {
     let logo: URL?
     let categoryLogo: URL?
     var isFavorite: Bool
+    
+    static func == (lhs: League, rhs: League) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

@@ -40,7 +40,7 @@ class ConcreteLeaguesRepository: LeaguesRepository {
         }
     }
     
-    func getFavoriteLeagues(sport: Sport, completionHandler: @escaping (Result<[League], Error>) -> Void) {
+    func getFavoriteLeagues(completionHandler: @escaping (Result<[League], Error>) -> Void) {
         queue.async {
             completionHandler(self.localDataSource.getFavoriteLeagues())
         }
