@@ -13,7 +13,7 @@ class OnboardingViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let items = [
             (UIImage(systemName: "photo")!, "Welcome", "Follow your favorite sport.", false),
             (UIImage(systemName: "photo")!, "Leagues", "Explore matches by league.", false),
@@ -28,30 +28,27 @@ class OnboardingViewController: UIPageViewController {
             controller.pageImage = image
             controller.pageTitle = title
             controller.pageDetails = details
-            
-            controller.buttonText = if lastPage {
-                "Let's Go!"
-            } else {
-                "Next"
-            }
+            controller.buttonText = if lastPage { "Let's Go!" } else { "Next" }
             
             return controller
         })
         
-        setViewControllers([pages[0]], direction: .forward, animated: true)
+        dataSource = self
+        
+        setViewControllers([pages[0]], direction: .forward, animated: false)
         didMove(toParent: pages[0])
     }
 }
 
 extension OnboardingViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let current = pages.firstIndex(of: viewController)!
-        return if current < pages.count - 1 { pages[current + 1] } else { nil }
+        guard let index = pages.firstIndex(of: viewController), index > 0 else { return nil }
+        return pages[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let current = pages.firstIndex(of: viewController)!
-        return if current > 0 { pages[current - 1] } else { nil }
+        guard let index = pages.firstIndex(of: viewController), index < pages.count - 1 else { return nil }
+        return pages[index + 1]
     }
 }
 
