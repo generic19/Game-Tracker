@@ -88,6 +88,7 @@ class AlamofireSportsAPIService: SportsAPIService {
                 case .failure(let error):
                     fetchResult = .failure(error)
             }
+            semaphore.signal()
         }
         
         semaphore.wait()

@@ -11,7 +11,6 @@ protocol SplashView: AnyObject {
     func navigateToOnboarding()
 }
 
-
 class SplashPresenter {
     weak var view: (any SplashView)?
     

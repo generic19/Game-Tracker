@@ -7,8 +7,9 @@
 
 import UIKit
 
-class LeaguesTableViewController: UITableViewController, LeaguesView {
+class LeaguesTableViewController: UITableViewController {
     var presenter: LeaguesPresenter!
+    var router: LeaguesRouter!
     
     var leagues = [League]()
     
@@ -16,8 +17,32 @@ class LeaguesTableViewController: UITableViewController, LeaguesView {
         super.viewDidLoad()
         
         navigationItem.title = presenter.title
+        presenter.loadLeagues()
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return leagues.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        let league = leagues[indexPath.row]
+        
+        cell.textLabel?.text = league.name
+        
+        return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.leagueSelected(leagues[indexPath.row])
+    }
+}
+
+extension LeaguesTableViewController: LeaguesView {
     func showLeagues(_ leagues: [League], sport: Sport?) {
         self.leagues = leagues
         tableView.reloadData()
@@ -37,21 +62,8 @@ class LeaguesTableViewController: UITableViewController, LeaguesView {
             tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         }
     }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leagues.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        let league = leagues[indexPath.row]
-        
-        cell.textLabel?.text = league.name
-        
-        return cell
+    
+    func navigateToLeagueDetails(_ league: League) {
+        router.navigateToLeagueDetails(league)
     }
 }

@@ -17,8 +17,15 @@ class AppContainer {
     }
     
     private func registerDependencies() {
-        ServicesAssembly().assemble(container: container)
-        SplashAssembly().assemble(container: container)
-        LeaguesAssembly().assemble(container: container)
+        container.register(UIStoryboard.self, name: "Main") { _ in UIStoryboard(name: "Main", bundle: nil) }
+        
+        let modulesAssemblies: [Assembly] = [
+            ServicesAssembly(),
+            SplashAssembly(),
+            SportsAssembly(),
+            LeaguesAssembly(),
+        ]
+        
+        modulesAssemblies.forEach { $0.assemble(container: container) }
     }
 }

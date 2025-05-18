@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        rootRouter = ConcreteRootRouter(window: window!, container: AppContainer.shared.container)
+        rootRouter = ConcreteRootRouter(window: window!, resolver: AppContainer.shared.container)
         rootRouter.start()
     }
 

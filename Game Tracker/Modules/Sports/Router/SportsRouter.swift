@@ -4,7 +4,9 @@
 //
 //  Created by Basel Alasadi on 17/05/2025.
 //
+import UIKit
 
 protocol SportsRouter {
-    func navigateToLeagues(sport: Sport)
+    func prepareViewController() -> SportsCollectionViewController
+    func navigateToLeagues(with: UINavigationController, sport: Sport)
 }

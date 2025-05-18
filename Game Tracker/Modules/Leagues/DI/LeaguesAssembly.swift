@@ -12,6 +12,8 @@ class LeaguesAssembly: Assembly {
         assembleData(container: container)
         assembleDomain(container: container)
         assemblePresentation(container: container)
+        
+        container.register(LeaguesRouter.self, factory: { r in ConcreteLeaguesRouter(resolver: r)})
     }
     
     private func assembleData(container: Container) {

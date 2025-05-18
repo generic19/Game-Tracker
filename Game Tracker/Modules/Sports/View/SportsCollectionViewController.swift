@@ -17,7 +17,6 @@ private let sports: [(Sport, String, String)] = [
 ]
 
 class SportsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
     var router: SportsRouter!
     
     override func viewDidLoad() {
@@ -48,6 +47,6 @@ class SportsCollectionViewController: UICollectionViewController, UICollectionVi
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sport = sports[indexPath.row].0
-        router.navigateToLeagues(sport: sport)
+        router.navigateToLeagues(with: navigationController!, sport: sport)
     }
 }

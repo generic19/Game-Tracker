@@ -31,7 +31,7 @@ class OnboardingItemViewController: UIViewController {
         imageView.image = pageImage
         lblTitle.text = pageTitle
         lblDetails.text = pageDetails
-        btnMain.titleLabel?.text = buttonText
+        btnMain.setTitle(buttonText, for: .normal)
     }
 
     @IBAction func mainAction(_ sender: UIButton) {

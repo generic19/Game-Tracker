@@ -4,9 +4,10 @@
 //
 //  Created by Basel Alasadi on 16/05/2025.
 //
+import Foundation
 
 enum LeaguesMode {
-    case allForSport(Sport)
+    case sport(Sport)
     case favorites
 }
 
@@ -23,15 +24,11 @@ class LeaguesPresenter {
     var mode: LeaguesMode
         
     var title: String {
-        get {
-            switch mode {
-                case .allForSport(let sport):
-                    sport.rawValue
-                    
-                case .favorites:
-                    "Favorite Leagues"
-            }
+        let name = switch mode {
+            case .sport(let sport): sport.rawValue.capitalized
+            case .favorites: "Favorite"
         }
+        return "\(name) Leagues"
     }
     
     init(
@@ -48,29 +45,33 @@ class LeaguesPresenter {
     
     func loadLeagues() {
         switch mode {
-            case .allForSport(let sport):
+            case .sport(let sport):
                 getLeaguesUseCase.execute(sport: sport) { [weak self] result in
-                    switch result {
-                        case .success(let leagues):
-                            self?.view?.showLeagues(leagues, sport: sport)
-                            
-                        case .cached(let leagues, let error):
-                            self?.view?.showLeagues(leagues, sport: sport)
-                            self?.view?.showError(title: "Showing cached leagues.", message: error.localizedDescription)
-                            
-                        case .failure(let error):
-                            self?.view?.showError(title: "Could not get leagues for \(sport).", message: error.localizedDescription)
+                    DispatchQueue.main.async {
+                        switch result {
+                            case .success(let leagues):
+                                self?.view?.showLeagues(leagues, sport: sport)
+                                
+                            case .cached(let leagues, let error):
+                                self?.view?.showLeagues(leagues, sport: sport)
+                                self?.view?.showError(title: "Showing cached leagues.", message: error.localizedDescription)
+                                
+                            case .failure(let error):
+                                self?.view?.showError(title: "Could not get leagues for \(sport).", message: error.localizedDescription)
+                        }
                     }
                 }
                 
             case .favorites:
                 getFavoriteLeaguesUseCase.execute { [weak self] result in
-                    switch result {
-                        case .success(let leagues):
-                            self?.view?.showLeagues(leagues, sport: nil)
-                            
-                        case .failure(let error):
-                            self?.view?.showError(title: "Could not get your favorite leagues.", message: error.localizedDescription)
+                    DispatchQueue.main.async {
+                        switch result {
+                            case .success(let leagues):
+                                self?.view?.showLeagues(leagues, sport: nil)
+                                
+                            case .failure(let error):
+                                self?.view?.showError(title: "Could not get your favorite leagues.", message: error.localizedDescription)
+                        }
                     }
                 }
         }
@@ -78,13 +79,19 @@ class LeaguesPresenter {
     
     func setFavorite(league: League, isFavorite: Bool) {
         setFavoriteLeaguesUseCase.execute(league: league, isFavorite: isFavorite) { [weak self] result in
-            switch result {
-                case .success(let newLeague):
-                    self?.view?.replaceLeague(league, with: newLeague)
-                    
-                case .failure(let error):
-                    self?.view?.showError(title: "Could not change league favorite status.", message: error.localizedDescription)
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let newLeague):
+                        self?.view?.replaceLeague(league, with: newLeague)
+                        
+                    case .failure(let error):
+                        self?.view?.showError(title: "Could not change league favorite status.", message: error.localizedDescription)
+                }
             }
         }
+    }
+    
+    func leagueSelected(_ league: League) {
+        view?.navigateToLeagueDetails(league)
     }
 }
