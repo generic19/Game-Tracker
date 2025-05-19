@@ -65,6 +65,12 @@ class EventsViewController: UIViewController {
             forCellWithReuseIdentifier: "TeamCollectionViewCell"
         )
         
+        collectionView.register(
+            UINib(nibName: "SectionTitleCollectionViewCell", bundle: nil),
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "SectionTitleCollectionViewCell"
+        )
+        
         collectionView.collectionViewLayout = createLayout()
     }
     
@@ -102,12 +108,22 @@ class EventsViewController: UIViewController {
                     section.contentInsets = NSDirectionalEdgeInsets(
                         top: 16, leading: 16, bottom: 16, trailing: 16
                     )
+                    let headerSize = NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .absolute(50)
+                    )
+                    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top
+                    )
+                    section.boundarySupplementaryItems = [sectionHeader]
                     return section
                     
                 case .recentEvents:
                     let size = NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .fractionalWidth(200/300)
+                        heightDimension: .absolute(220)
                     )
                     let item = NSCollectionLayoutItem(layoutSize: size)
                     let group = NSCollectionLayoutGroup.vertical(
@@ -118,6 +134,16 @@ class EventsViewController: UIViewController {
                     section.contentInsets = NSDirectionalEdgeInsets(
                         top: 16, leading: 16, bottom: 16, trailing: 16
                     )
+                    let headerSize = NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .absolute(50)
+                    )
+                    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top
+                    )
+                    section.boundarySupplementaryItems = [sectionHeader]
                     return section
                     
                 case .teams:
@@ -139,6 +165,16 @@ class EventsViewController: UIViewController {
                     section.contentInsets = NSDirectionalEdgeInsets(
                         top: 16, leading: 16, bottom: 32, trailing: 16
                     )
+                    let headerSize = NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .absolute(50)
+                    )
+                    let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: headerSize,
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top
+                    )
+                    section.boundarySupplementaryItems = [sectionHeader]
                     return section
             }
         }
@@ -190,6 +226,25 @@ extension EventsViewController: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: false)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let section = sections[indexPath.section]
+        
+        guard kind == UICollectionView.elementKindSectionHeader, section != .header else {
+            return UICollectionReusableView()
+        }
+        
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionTitleCollectionViewCell", for: indexPath) as! SectionTitleCollectionViewCell
+        
+        cell.lblTitle.text = switch section {
+            case .upcomingEvents: "Upcoming Events"
+            case .recentEvents: "Recent Events"
+            case .teams: "Teams"
+            default: nil
+        }
+        
+        return cell
+    }
 }
 
 extension EventsViewController: EventsView {
@@ -221,6 +276,4 @@ extension EventsViewController: EventsView {
     func navigateToTeam(_ team: Team) {
         router.navigateToTeam(team)
     }
-    
-    
 }

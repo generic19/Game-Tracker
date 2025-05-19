@@ -71,7 +71,7 @@ struct FootballEventRemoteDTO: RemoteDTO {
                     coaches: nil,
                 )
             ),
-            result: result,
+            result: (result != "-" ? result : nil),
         )
     }
 }
