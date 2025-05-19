@@ -24,6 +24,8 @@ class AppContainer {
             SplashAssembly(),
             SportsAssembly(),
             LeaguesAssembly(),
+            EventsAssembly(),
+            TeamsAssembly(),
         ]
         
         modulesAssemblies.forEach { $0.assemble(container: container) }

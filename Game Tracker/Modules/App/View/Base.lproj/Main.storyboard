@@ -184,8 +184,58 @@
             </objects>
             <point key="canvasLocation" x="1961" y="-75"/>
         </scene>
+        <!--League Events-->
+        <scene sceneID="teE-vG-nu7">
+            <objects>
+                <viewController storyboardIdentifier="Events" title="League Events" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Pu-Zh-Pmh" customClass="EventsViewController" customModule="Game_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vtb-me-x1l">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kW4-vg-pdF">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KR9-CU-iPW">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="3Pu-Zh-Pmh" id="J2k-6C-sfh"/>
+                                    <outlet property="delegate" destination="3Pu-Zh-Pmh" id="QhQ-Lq-csD"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DHO-5g-KhE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DHO-5g-KhE" firstAttribute="bottom" secondItem="kW4-vg-pdF" secondAttribute="bottom" id="Io8-Hm-Htn"/>
+                            <constraint firstItem="DHO-5g-KhE" firstAttribute="trailing" secondItem="kW4-vg-pdF" secondAttribute="trailing" id="rK0-RL-ScR"/>
+                            <constraint firstItem="kW4-vg-pdF" firstAttribute="top" secondItem="DHO-5g-KhE" secondAttribute="top" id="rf0-6H-fq8"/>
+                            <constraint firstItem="kW4-vg-pdF" firstAttribute="leading" secondItem="DHO-5g-KhE" secondAttribute="leading" id="x3E-oM-9sp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="League Name" id="8s8-Xb-JX1">
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" image="heart" catalog="system" id="1cb-zV-gmB">
+                            <connections>
+                                <action selector="favoriteAction:" destination="3Pu-Zh-Pmh" id="xMH-fL-oaX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnFavorite" destination="1cb-zV-gmB" id="ywR-WM-kwn"/>
+                        <outlet property="collectionView" destination="kW4-vg-pdF" id="7E1-gT-BVt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SWT-1J-OUF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2842" y="-75"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

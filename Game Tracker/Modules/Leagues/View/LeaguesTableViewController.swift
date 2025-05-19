@@ -64,6 +64,6 @@ extension LeaguesTableViewController: LeaguesView {
     }
     
     func navigateToLeagueDetails(_ league: League) {
-        router.navigateToLeagueDetails(league)
+        router.navigateToEvents(with: navigationController!, league: league)
     }
 }

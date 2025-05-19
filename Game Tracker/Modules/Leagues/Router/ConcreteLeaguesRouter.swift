@@ -26,7 +26,10 @@ class ConcreteLeaguesRouter: LeaguesRouter {
         return controller
     }
     
-    func navigateToLeagueDetails(_ league: League) {
-        // TODO: Navigate to league details
+    func navigateToEvents(with navigationController: UINavigationController, league: League) {
+        let router = resolver.resolve(EventsRouter.self)!
+        let controller = router.prepareViewController(league: league)
+        
+        navigationController.pushViewController(controller, animated: true)
     }
 }

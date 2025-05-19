@@ -10,14 +10,14 @@ typealias RemoteDTO = Decodable & Sendable & ModelConvertible
 
 private struct APISuccessResponse<T: RemoteDTO>: Decodable & Sendable {
     let success: Int
-    let result: [T]
+    let result: [T]?
 }
 
 private let API_BASE = URL(string: "https://apiv2.allsportsapi.com")!.with(params: [
     "APIkey": SPORTS_API_KEY
 ])
 
-private let dateFormatter = DateFormatter.isoDate()
+private let dateFormatter = DateFormatter.standardDate()
 
 class AlamofireSportsAPIService: SportsAPIService {
     
@@ -42,7 +42,7 @@ class AlamofireSportsAPIService: SportsAPIService {
         let url = API_BASE.with(path: sport.rawValue, params: [
             "met": "Fixtures",
             "from": dateFormatter.string(from: startDate),
-            "to": dateFormatter.string(from: startDate),
+            "to": dateFormatter.string(from: endDate),
             "timezone": "UTC",
             "leagueId": "\(leagueId)",
         ])
@@ -83,7 +83,7 @@ class AlamofireSportsAPIService: SportsAPIService {
         AF.request(url).responseDecodable(of: APISuccessResponse<T>.self) { response in
             switch response.result {
                 case .success(let response):
-                    fetchResult = .success(response.result)
+                    fetchResult = .success(response.result ?? [])
                     
                 case .failure(let error):
                     fetchResult = .failure(error)
@@ -96,23 +96,3 @@ class AlamofireSportsAPIService: SportsAPIService {
     }
 }
 
-extension DateFormatter {
-    static func isoDate() -> DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter
-    }
-}
-
-extension URL {
-    func with(path: String? = nil, params: [String: String]) -> URL {
-        let queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
-        
-        var url = self.appending(queryItems: queryItems)
-        if let path = path {
-            url = url.appending(path: path)
-        }
-        
-        return url
-    }
-}

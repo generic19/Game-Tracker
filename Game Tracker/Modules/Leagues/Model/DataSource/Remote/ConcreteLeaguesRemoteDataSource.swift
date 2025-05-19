@@ -15,17 +15,10 @@ class ConcreteLeaguesRemoteDataSource: LeaguesRemoteDataSource {
     
     func getLeagues(for sport: Sport) -> Result<[League], Error> {
         let result = switch sport {
-            case .football:
-                service.fetchLeagues(as: FootballLeagueRemoteDTO.self, sport: sport)
-                
-            case .basketball:
-                service.fetchLeagues(as: BasketballLeagueRemoteDTO.self, sport: sport)
-                
-            case .cricket:
-                service.fetchLeagues(as: CricketLeagueRemoteDTO.self, sport: sport)
-                
-            case .tennis:
-                service.fetchLeagues(as: TennisLeagueRemoteDTO.self, sport: sport)
+            case .football: service.fetchLeagues(as: FootballLeagueRemoteDTO.self, sport: sport)
+            case .basketball: service.fetchLeagues(as: BasketballLeagueRemoteDTO.self, sport: sport)
+            case .cricket: service.fetchLeagues(as: CricketLeagueRemoteDTO.self, sport: sport)
+            case .tennis: service.fetchLeagues(as: TennisLeagueRemoteDTO.self, sport: sport)
         }
         
         switch result {

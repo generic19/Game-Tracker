@@ -28,7 +28,7 @@ struct FootballLeagueRemoteDTO: RemoteDTO {
         }
         
         var categoryLogo: URL?
-        if let urlString = leagueLogo, !urlString.hasSuffix("/") {
+        if let urlString = countryLogo, !urlString.hasSuffix("/") {
             categoryLogo = URL(string: urlString)
         }
         

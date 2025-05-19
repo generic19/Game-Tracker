@@ -12,8 +12,7 @@ class LeaguesAssembly: Assembly {
         assembleData(container: container)
         assembleDomain(container: container)
         assemblePresentation(container: container)
-        
-        container.register(LeaguesRouter.self, factory: { r in ConcreteLeaguesRouter(resolver: r)})
+        assembleRouting(container: container)
     }
     
     private func assembleData(container: Container) {
@@ -66,5 +65,11 @@ class LeaguesAssembly: Assembly {
                 arguments: args
             )
         }
+    }
+    
+    private func assembleRouting(container: Container) {
+        container.register(LeaguesRouter.self, factory: { r in
+            ConcreteLeaguesRouter(resolver: r)
+        })
     }
 }
