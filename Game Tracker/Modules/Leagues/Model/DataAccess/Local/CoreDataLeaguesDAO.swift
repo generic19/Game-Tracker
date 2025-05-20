@@ -30,21 +30,20 @@ class CoreDataLeaguesDAO: LeaguesDAO {
     }
     
     func setFavorite(league: League) -> Result<LeagueEntity, Error> {
-        let description = NSEntityDescription.entity(forEntityName: "LeagueEntity", in: viewContext)!
+        let entity = LeagueEntity(context: viewContext)
         
-        description.setValue(league.sport, forKey: "sport")
-        description.setValue(league.id, forKey: "id")
-        description.setValue(league.name, forKey: "name")
-        description.setValue(league.categoryName, forKey: "categoryName")
-        description.setValue(league.logo, forKey: "logo")
-        description.setValue(league.categoryLogo, forKey: "categoryLogo")
-        
-        let entity = LeagueEntity(entity: description, insertInto: viewContext)
+        entity.sportRaw = league.sport.rawValue
+        entity.id = Int64(league.id)
+        entity.name = league.name
+        entity.categoryName = league.categoryName
+        entity.logo = league.logo
+        entity.categoryLogo = league.categoryLogo
         
         do {
             try viewContext.save()
             return .success(entity)
-        } catch let error {
+        } catch {
+            viewContext.rollback()
             return .failure(error)
         }
     }

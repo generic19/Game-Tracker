@@ -84,14 +84,16 @@ class LeaguesPresenter {
         }
     }
     
-    func setFavorite(league: League, isFavorite: Bool) {
+    func setFavorite(league: League, isFavorite: Bool, completionHandler: ((Bool) -> Void)? = nil) {
         setFavoriteLeaguesUseCase.execute(league: league, isFavorite: isFavorite) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                     case .success(let newLeague):
+                        completionHandler?(true)
                         self?.view?.replaceLeague(league, with: newLeague)
                         
                     case .failure(let error):
+                        completionHandler?(false)
                         self?.view?.showError(title: "Could not change league favorite status.", message: error.localizedDescription)
                 }
             }

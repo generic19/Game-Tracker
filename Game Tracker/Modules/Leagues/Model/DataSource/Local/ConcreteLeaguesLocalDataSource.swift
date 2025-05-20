@@ -38,7 +38,7 @@ class ConcreteLeaguesLocalDataSource: LeaguesLocalDataSource {
             case .success:
                 var newLeague = league
                 newLeague.isFavorite = true
-                return .success(league)
+                return .success(newLeague)
                 
             case .failure(let error):
                 return .failure(error)
@@ -52,7 +52,7 @@ class ConcreteLeaguesLocalDataSource: LeaguesLocalDataSource {
             case .success:
                 var newLeague = league
                 newLeague.isFavorite = false
-                return .success(league)
+                return .success(newLeague)
                 
             case .failure(let error):
                 return .failure(error)

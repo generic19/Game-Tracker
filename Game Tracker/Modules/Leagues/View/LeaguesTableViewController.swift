@@ -17,7 +17,16 @@ class LeaguesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = presenter.title
+        tableView.rowHeight = 70
+        
         presenter.loadLeagues()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        switch presenter.mode {
+            case .favorites: presenter.loadLeagues()
+            default: break
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -29,16 +38,30 @@ class LeaguesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         let league = leagues[indexPath.row]
-        
-        cell.textLabel?.text = league.name
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueTableViewCell") as! LeagueTableViewCell
+        cell.configure(with: league)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.leagueSelected(leagues[indexPath.row])
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let league = leagues[indexPath.row]
+        
+        let favoriteAction = UIContextualAction(
+            style: league.isFavorite ? .destructive : .normal,
+            title: nil,
+            handler: { _, _, completionHandler in
+                self.presenter.setFavorite(league: league, isFavorite: !league.isFavorite, completionHandler: completionHandler)
+            }
+        )
+        favoriteAction.backgroundColor = UIColor.systemPink
+        favoriteAction.image = UIImage(systemName: league.isFavorite ? "heart.slash.fill" : "heart.fill")
+        
+        return UISwipeActionsConfiguration(actions: [favoriteAction])
     }
 }
 
