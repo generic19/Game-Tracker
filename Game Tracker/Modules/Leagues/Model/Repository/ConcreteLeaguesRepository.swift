@@ -27,7 +27,7 @@ class ConcreteLeaguesRepository: LeaguesRepository {
                     resultOut = .success(leagues)
                     
                 case .failure(let networkError):
-                    let localResult = self.localDataSource.getFavoriteLeagues()
+                    let localResult = self.localDataSource.getFavoriteLeagues(onlyForSport: sport)
                     switch localResult {
                         case .success(let leagues):
                             resultOut = .cached(leagues, networkError)

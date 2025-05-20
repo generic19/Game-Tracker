@@ -7,7 +7,7 @@
 import Foundation
 
 protocol LeaguesView: AnyObject {
-    func showLeagues(_ leagues: [League], sport: Sport?)
+    func showLeagues(_ leagues: [League], sport: Sport?, cached: Bool?)
     func showError(title: String, message: String)
     func replaceLeague(_ league: League, with newLeague: League)
     func navigateToLeagueDetails(_ league: League)
@@ -24,13 +24,17 @@ struct LeaguesPresenterArguments {
 
 class LeaguesPresenter {
     weak var view: (any LeaguesView)?
+    
     let getLeaguesUseCase: GetLeaguesUseCase
     let getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase
     let setFavoriteLeaguesUseCase: SetFavoriteLeagueUseCase
     let updateLeaguesFavoriteStateUseCase: UpdateLeaguesFavoriteStateUseCase
+    let networkStatusProvider: NetworkStatusProvider
     
     var mode: LeaguesMode
         
+    private var cachedErrorShown = false
+    
     var title: String {
         let name = switch mode {
             case .sport(let sport): sport.rawValue.capitalized
@@ -44,12 +48,14 @@ class LeaguesPresenter {
         getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
         setFavoriteLeaguesUseCase: SetFavoriteLeagueUseCase,
         updateLeaguesFavoriteStateUseCase: UpdateLeaguesFavoriteStateUseCase,
+        networkStatusProvider: NetworkStatusProvider,
         arguments: LeaguesPresenterArguments,
     ) {
         self.getLeaguesUseCase = getLeaguesUseCase
         self.getFavoriteLeaguesUseCase = getFavoriteLeaguesUseCase
         self.setFavoriteLeaguesUseCase = setFavoriteLeaguesUseCase
         self.updateLeaguesFavoriteStateUseCase = updateLeaguesFavoriteStateUseCase
+        self.networkStatusProvider = networkStatusProvider
         self.mode = arguments.mode
     }
     
@@ -58,16 +64,17 @@ class LeaguesPresenter {
             case .sport(let sport):
                 getLeaguesUseCase.execute(sport: sport) { [weak self] result in
                     DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        
                         switch result {
                             case .success(let leagues):
-                                self?.view?.showLeagues(leagues, sport: sport)
+                                self.view?.showLeagues(leagues, sport: sport, cached: false)
                                 
                             case .cached(let leagues, let error):
-                                self?.view?.showLeagues(leagues, sport: sport)
-                                self?.view?.showError(title: "Showing cached leagues.", message: error.localizedDescription)
+                                self.view?.showLeagues(leagues, sport: sport, cached: true)
                                 
                             case .failure(let error):
-                                self?.view?.showError(title: "Could not get leagues for \(sport).", message: error.localizedDescription)
+                                self.view?.showError(title: "Could not get leagues for \(sport).", message: error.localizedDescription)
                         }
                     }
                 }
@@ -77,7 +84,7 @@ class LeaguesPresenter {
                     DispatchQueue.main.async {
                         switch result {
                             case .success(let leagues):
-                                self?.view?.showLeagues(leagues, sport: nil)
+                                self?.view?.showLeagues(leagues, sport: nil, cached: false)
                                 
                             case .failure(let error):
                                 self?.view?.showError(title: "Could not get your favorite leagues.", message: error.localizedDescription)
@@ -95,7 +102,7 @@ class LeaguesPresenter {
             }
             
             DispatchQueue.main.async {
-                self.view?.showLeagues(leagues, sport: sport)
+                self.view?.showLeagues(leagues, sport: sport, cached: nil)
             }
         }
     }
@@ -117,6 +124,10 @@ class LeaguesPresenter {
     }
     
     func leagueSelected(_ league: League) {
-        view?.navigateToLeagueDetails(league)
+        if networkStatusProvider.isConnected {
+            view?.navigateToLeagueDetails(league)
+        } else {
+            view?.showError(title: "Not connected", message: "Cannot display league details without a network connection.")
+        }
     }
 }

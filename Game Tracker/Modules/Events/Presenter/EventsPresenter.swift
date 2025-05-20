@@ -87,8 +87,10 @@ class EventsPresenter {
                 if !errors.isEmpty {
                     let joinedErrors = errors.compactMap({ $0.0 }).joined(separator: ", ")
                     
-                    let title = "Could not fetch: \(joinedErrors))"
-                    let message = errors.compactMap({ "\($0.0): \($0.1)" }).joined(separator: "\n\n")
+                    let title = "Could not fetch: \(joinedErrors)"
+                    let message = errors
+                        .compactMap({ "\($0.0.capitalized): \($0.1)" })
+                        .joined(separator: "\n\n")
                     
                     self.view?.showError(title: title, message: message)
                 }

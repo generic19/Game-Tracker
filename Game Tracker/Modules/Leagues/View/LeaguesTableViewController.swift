@@ -66,7 +66,13 @@ class LeaguesTableViewController: UITableViewController {
 }
 
 extension LeaguesTableViewController: LeaguesView {
-    func showLeagues(_ leagues: [League], sport: Sport?) {
+    func showLeagues(_ leagues: [League], sport: Sport?, cached: Bool?) {
+        navigationItem.title = switch cached {
+            case true: "\(presenter.title) (Cached)"
+            case false: presenter.title
+            default: navigationItem.title
+        }
+        
         self.leagues = leagues
         tableView.reloadData()
     }

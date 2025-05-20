@@ -67,6 +67,7 @@ class LeaguesAssembly: Assembly {
                 getFavoriteLeaguesUseCase: r.resolve(GetFavoriteLeaguesUseCase.self)!,
                 setFavoriteLeaguesUseCase: r.resolve(SetFavoriteLeagueUseCase.self)!,
                 updateLeaguesFavoriteStateUseCase: r.resolve(UpdateLeaguesFavoriteStateUseCase.self)!,
+                networkStatusProvider: r.resolve(NetworkStatusProvider.self)!,
                 arguments: args
             )
         }

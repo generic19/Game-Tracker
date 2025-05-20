@@ -14,5 +14,7 @@ class ServicesAssembly: Assembly {
         })
         
         container.register(SportsAPIService.self) { _ in AlamofireSportsAPIService() }
+        
+        container.register(NetworkStatusProvider.self, factory: { _ in  ReachabilityNetworkStatusProvider() })
     }
 }

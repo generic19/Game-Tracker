@@ -10,10 +10,10 @@ import UIKit
 private let reuseIdentifier = "cell"
 
 private let sports: [(Sport, String, String)] = [
-    (.football, "soccerball", "Football"),
+    (.football, "football", "Football"),
     (.basketball, "basketball", "Basketball"),
-    (.cricket, "cricket.ball", "Cricket"),
-    (.tennis, "tennisball", "Tennis"),
+    (.cricket, "cricket", "Cricket"),
+    (.tennis, "tennis", "Tennis"),
 ]
 
 class SportsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -31,18 +31,31 @@ class SportsCollectionViewController: UICollectionViewController, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SportCollectionViewCell
         
         let sport = sports[indexPath.row]
-        cell.ivImage.image = UIImage(systemName: sport.1)
+        cell.ivImage.image = UIImage(named: sport.1)
         cell.lblTitle.text = sport.2
         
         return cell
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let containerWidth = collectionView.frame.size.width
-        let side = (containerWidth - 80) / 2
         
-        return CGSize(width: side, height: side)
+        let width = (containerWidth - 48) / 2
+        let height = if let superviewHeight = collectionView.superview?.frame.height {
+            if superviewHeight > containerWidth {
+                (superviewHeight - 280) / 2
+            } else {
+                width * 0.7
+            }
+        } else {
+            width * 3 / 2 + 36
+        }
+        
+        return CGSize(width: width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

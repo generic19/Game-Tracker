@@ -7,7 +7,7 @@
 import UIKit
 
 class EventsViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnFavorite: UIBarButtonItem!
     
@@ -31,7 +31,7 @@ class EventsViewController: UIViewController {
         if upcomingEvents?.count ?? 0 > 0 { result.append(.upcomingEvents) }
         if recentEvents?.count ?? 0 > 0 { result.append(.recentEvents) }
         if teams?.count ?? 0 > 0 { result.append(.teams) }
-
+        
         return result
     }
     
@@ -51,7 +51,7 @@ class EventsViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView.dataSource = self
-        collectionView.delegate   = self
+        collectionView.delegate = self
         
         collectionView.register(
             UINib(nibName: "LeagueHeaderCollectionViewCell", bundle: nil),
@@ -279,3 +279,4 @@ extension EventsViewController: EventsView {
         router.navigateToTeam(with: navigationController!, team: team)
     }
 }
+
