@@ -20,5 +20,7 @@ class TeamsAssembly: Assembly {
         container.register(FetchLeagueTeamsUseCase.self) { r in
             FetchLeagueTeamsUseCase(repository: r.resolve(TeamsRepository.self)!)
         }
+        
+        container.register(TeamRouter.self, factory: {r in ConcreteTeamRouter(resolver: r)})
     }
 }

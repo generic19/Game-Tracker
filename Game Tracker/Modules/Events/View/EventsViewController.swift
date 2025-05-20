@@ -274,6 +274,6 @@ extension EventsViewController: EventsView {
     }
     
     func navigateToTeam(_ team: Team) {
-        router.navigateToTeam(team)
+        router.navigateToTeam(with: navigationController!, team: team)
     }
 }

@@ -28,7 +28,10 @@ class ConcreteEventsRouter: EventsRouter {
         return controller
     }
     
-    func navigateToTeam(_ team: Team) {
+    func navigateToTeam(with navigationController: UINavigationController, team: Team) {
+        let router = resolver.resolve(TeamRouter.self)!
+        let controller = router.prepareViewController(team: team)
+        navigationController.pushViewController(controller, animated: true)
         
     }
 }
