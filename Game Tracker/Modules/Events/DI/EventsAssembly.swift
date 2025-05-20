@@ -37,6 +37,7 @@ class EventsAssembly: Assembly {
                 fetchUpcomingEventsUseCase: r.resolve(FetchUpcomingEventsUseCase.self)!,
                 fetchRecentEventsUseCase: r.resolve(FetchRecentEventsUseCase.self)!,
                 fetchLeagueTeamsUseCase: r.resolve(FetchLeagueTeamsUseCase.self)!,
+                setFavoriteLeagueUseCase: r.resolve(SetFavoriteLeagueUseCase.self)!,
             )
         })
         

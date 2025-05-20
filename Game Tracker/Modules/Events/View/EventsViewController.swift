@@ -39,13 +39,14 @@ class EventsViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = presenter.league.name
+        btnFavorite.image = UIImage(systemName: presenter.league.isFavorite ? "heart.fill" : "heart")
         
         setupCollectionView()
         presenter.loadData()
     }
     
     @IBAction func favoriteAction(_ sender: UIBarButtonItem) {
-        
+        presenter.toggleFavorite()
     }
     
     private func setupCollectionView() {
@@ -249,6 +250,7 @@ extension EventsViewController: UICollectionViewDelegate {
 
 extension EventsViewController: EventsView {
     func updateLeague() {
+        btnFavorite.image = UIImage(systemName: presenter.league.isFavorite ? "heart.fill" : "heart")
         collectionView.reloadSections(IndexSet.init(integer: 0))
     }
     

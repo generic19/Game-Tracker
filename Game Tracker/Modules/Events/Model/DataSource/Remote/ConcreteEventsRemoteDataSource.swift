@@ -54,7 +54,7 @@ class ConcreteEventsRemoteDataSource: EventsRemoteDataSource {
                 
             case .basketball:
                 service.fetchEvents(
-                    as: FootballEventRemoteDTO.self,
+                    as: BasketballEventRemoteDTO.self,
                     sport: league.sport,
                     leagueId: league.id,
                     from: from,
@@ -63,7 +63,7 @@ class ConcreteEventsRemoteDataSource: EventsRemoteDataSource {
                 
             case .cricket:
                 service.fetchEvents(
-                    as: FootballEventRemoteDTO.self,
+                    as: CricketEventRemoteDTO.self,
                     sport: league.sport,
                     leagueId: league.id,
                     from: from,
@@ -72,7 +72,7 @@ class ConcreteEventsRemoteDataSource: EventsRemoteDataSource {
                 
             case .tennis:
                 service.fetchEvents(
-                    as: FootballEventRemoteDTO.self,
+                    as: TennisEventRemoteDTO.self,
                     sport: league.sport,
                     leagueId: league.id,
                     from: from,

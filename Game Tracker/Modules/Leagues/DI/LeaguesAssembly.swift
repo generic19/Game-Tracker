@@ -54,6 +54,10 @@ class LeaguesAssembly: Assembly {
         container.register(SetFavoriteLeagueUseCase.self) { r in
             SetFavoriteLeagueUseCase(repository: r.resolve(LeaguesRepository.self)!)
         }
+        
+        container.register(UpdateLeaguesFavoriteStateUseCase.self) { r in
+            UpdateLeaguesFavoriteStateUseCase(repository: r.resolve(LeaguesRepository.self)!)
+        }
     }
     
     private func assemblePresentation(container: Container) {
@@ -62,6 +66,7 @@ class LeaguesAssembly: Assembly {
                 getLeaguesUseCase: r.resolve(GetLeaguesUseCase.self)!,
                 getFavoriteLeaguesUseCase: r.resolve(GetFavoriteLeaguesUseCase.self)!,
                 setFavoriteLeaguesUseCase: r.resolve(SetFavoriteLeagueUseCase.self)!,
+                updateLeaguesFavoriteStateUseCase: r.resolve(UpdateLeaguesFavoriteStateUseCase.self)!,
                 arguments: args
             )
         }

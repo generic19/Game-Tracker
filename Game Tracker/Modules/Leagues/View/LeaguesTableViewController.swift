@@ -25,7 +25,7 @@ class LeaguesTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         switch presenter.mode {
             case .favorites: presenter.loadLeagues()
-            default: break
+            case .sport: presenter.updateFavoriteState(leagues: leagues)
         }
     }
 
@@ -79,10 +79,15 @@ extension LeaguesTableViewController: LeaguesView {
     
     func replaceLeague(_ league: League, with newLeague: League) {
         if let index = leagues.firstIndex(where: { league == $0 }) {
-            leagues.remove(at: index)
-            leagues.insert(newLeague, at: index)
-            
-            tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+            switch presenter.mode {
+                case .favorites:
+                    leagues.remove(at: index)
+                    tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    
+                case .sport:
+                    leagues.remove(at: index)
+                    leagues.insert(newLeague, at: index)
+            }
         }
     }
     

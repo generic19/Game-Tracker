@@ -19,14 +19,16 @@ class EventsPresenter {
     private let fetchUpcomingEventsUseCase: FetchUpcomingEventsUseCase
     private let fetchRecentEventsUseCase: FetchRecentEventsUseCase
     private let fetchLeagueTeamsUseCase: FetchLeagueTeamsUseCase
+    private let setFavoriteLeagueUseCase: SetFavoriteLeagueUseCase
     
     weak var view: (any EventsView)?
     var league: League!
     
-    init(fetchUpcomingEventsUseCase: FetchUpcomingEventsUseCase, fetchRecentEventsUseCase: FetchRecentEventsUseCase, fetchLeagueTeamsUseCase: FetchLeagueTeamsUseCase) {
+    init(fetchUpcomingEventsUseCase: FetchUpcomingEventsUseCase, fetchRecentEventsUseCase: FetchRecentEventsUseCase, fetchLeagueTeamsUseCase: FetchLeagueTeamsUseCase, setFavoriteLeagueUseCase: SetFavoriteLeagueUseCase) {
         self.fetchUpcomingEventsUseCase = fetchUpcomingEventsUseCase
         self.fetchRecentEventsUseCase = fetchRecentEventsUseCase
         self.fetchLeagueTeamsUseCase = fetchLeagueTeamsUseCase
+        self.setFavoriteLeagueUseCase = setFavoriteLeagueUseCase
     }
     
     func loadData() {
@@ -90,6 +92,23 @@ class EventsPresenter {
                     
                     self.view?.showError(title: title, message: message)
                 }
+            }
+        }
+    }
+    
+    func toggleFavorite() {
+        setFavoriteLeagueUseCase.execute(league: league, isFavorite: !league.isFavorite) { result in
+            switch result {
+                case .success(let league):
+                    DispatchQueue.main.async {
+                        self.league = league
+                        self.view?.updateLeague()
+                    }
+                    
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.view?.showError(title: "Could not set league favorite state", message: error.localizedDescription)
+                    }
             }
         }
     }

@@ -27,6 +27,7 @@ class LeaguesPresenter {
     let getLeaguesUseCase: GetLeaguesUseCase
     let getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase
     let setFavoriteLeaguesUseCase: SetFavoriteLeagueUseCase
+    let updateLeaguesFavoriteStateUseCase: UpdateLeaguesFavoriteStateUseCase
     
     var mode: LeaguesMode
         
@@ -42,11 +43,13 @@ class LeaguesPresenter {
         getLeaguesUseCase: GetLeaguesUseCase,
         getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
         setFavoriteLeaguesUseCase: SetFavoriteLeagueUseCase,
+        updateLeaguesFavoriteStateUseCase: UpdateLeaguesFavoriteStateUseCase,
         arguments: LeaguesPresenterArguments,
     ) {
         self.getLeaguesUseCase = getLeaguesUseCase
         self.getFavoriteLeaguesUseCase = getFavoriteLeaguesUseCase
         self.setFavoriteLeaguesUseCase = setFavoriteLeaguesUseCase
+        self.updateLeaguesFavoriteStateUseCase = updateLeaguesFavoriteStateUseCase
         self.mode = arguments.mode
     }
     
@@ -81,6 +84,19 @@ class LeaguesPresenter {
                         }
                     }
                 }
+        }
+    }
+    
+    func updateFavoriteState(leagues: [League]) {
+        updateLeaguesFavoriteStateUseCase.execute(leagues: leagues) { leagues in
+            let sport: Sport? = switch self.mode {
+                case .favorites: nil
+                case .sport(let sport): sport
+            }
+            
+            DispatchQueue.main.async {
+                self.view?.showLeagues(leagues, sport: sport)
+            }
         }
     }
     

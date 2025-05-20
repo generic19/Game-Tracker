@@ -19,21 +19,11 @@ class ConcreteLeaguesRepository: LeaguesRepository {
     
     func getLeagues(sport: Sport, completionHandler: @escaping (LeaguesResult) -> Void) {
         queue.async {
-            let favoriteIds: Set<Int>? = switch self.localDataSource.getFavoriteLeagues() {
-                case .success(let favorites): Set(favorites.map { $0.id })
-                case .failure: nil
-            }
-            
             let result = self.remoteDataSource.getLeagues(for: sport)
             var resultOut: LeaguesResult!
             
             switch result {
-                case .success(var leagues):
-                    if let ids = favoriteIds {
-                        for i in 0..<leagues.count {
-                            leagues[i].isFavorite = ids.contains(leagues[i].id)
-                        }
-                    }
+                case .success(let leagues):
                     resultOut = .success(leagues)
                     
                 case .failure(let networkError):
@@ -47,6 +37,24 @@ class ConcreteLeaguesRepository: LeaguesRepository {
             }
             
             completionHandler(resultOut)
+        }
+    }
+    
+    func updateLeaguesFavoriteState(leagues: [League], completionHandler: @escaping ([League]) -> Void) {
+        queue.async {
+            var leagues = leagues
+            
+            switch self.localDataSource.getFavoriteLeagues() {
+                case .success(let favorites):
+                    let favoriteIds = Set(favorites.map { $0.id })
+                    for i in 0..<leagues.count {
+                        leagues[i].isFavorite = favoriteIds.contains(leagues[i].id)
+                    }
+                    
+                default: break
+            }
+            
+            completionHandler(leagues)
         }
     }
     
