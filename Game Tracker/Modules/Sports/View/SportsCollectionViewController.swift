@@ -9,11 +9,11 @@ import UIKit
 
 private let reuseIdentifier = "cell"
 
-private let sports: [(Sport, String, String)] = [
-    (.football, "football", "Football"),
-    (.basketball, "basketball", "Basketball"),
-    (.cricket, "cricket", "Cricket"),
-    (.tennis, "tennis", "Tennis"),
+private let sports: [(Sport, String)] = [
+    (.football, "football"),
+    (.basketball, "basketball"),
+    (.cricket, "cricket"),
+    (.tennis, "tennis"),
 ]
 
 class SportsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -32,7 +32,7 @@ class SportsCollectionViewController: UICollectionViewController, UICollectionVi
         
         let sport = sports[indexPath.row]
         cell.ivImage.image = UIImage(named: sport.1)
-        cell.lblTitle.text = sport.2
+        cell.lblTitle.text = sport.0.localizedName
         
         return cell
     }

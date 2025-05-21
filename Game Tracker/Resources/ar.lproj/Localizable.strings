@@ -1,0 +1,78 @@
+/* 
+  Localizable.strings
+  Game Tracker
+
+  Created by Basel Alasadi on 21/05/2025.
+  
+*/
+
+"sports" = "الرياضات";
+"favorites" = "المفضلة";
+"action_okay" = "حسناً";
+
+
+// Events
+//--------
+
+// EventsPresenter:
+"error_fetch_title" = "تعذّر الاسترداد: %@";
+"error_set_favorite_title" = "تعذّر تعيين حالة المفضلة للدوري";
+"context_upcoming_events" = "المباريات القادمة";
+"context_recent_events" = "المباريات الأخيرة";
+"context_teams" = "الفرق";
+
+// EventCollectionViewCell:
+"event_finished" = "انتهت";
+
+// EventsViewController:
+"section_upcomingEvents" = "المباريات القادمة";
+"section_recentEvents" = "المباريات الأخيرة";
+"section_teams" = "الفرق";
+
+
+// Leagues
+// --------
+
+// LeaguesPresenter:
+"sport_football" = "كرة القدم";
+"sport_basketball" = "كرة السلة";
+"sport_cricket" = "الكريكيت";
+"sport_tennis" = "كرة المضرب";
+"favorite" = "المفضلة";
+"format_title" = "دوريات %@";
+"format_league_error_sport" = "تعذّر جلب الدوريات لـ %@.";
+"league_error_favorite" = "تعذّر جلب الدوريات المفضلة لديك.";
+"league_error_set_favorite" = "تعذّر تغيير حالة المفضلة للدوري.";
+"error_connectivity_title" = "غير متصل";
+"error_connectivity_message" = "لا يمكن عرض تفاصيل الدوري دون اتصال بالشبكة.";
+
+// LeaguesTableViewController:
+"format_cached" = "%@ (مخزن مؤقتًا)";
+
+// Onboarding
+// -----------
+
+// OnboardingViewController:
+"onboarding_title_1" = "رفيقك الرياضي الشامل";
+"onboarding_content_1" = "تابع دوريات كرة القدم وكرة السلة والكريكيت والتنس من البداية وحتى صافرة النهاية.";
+
+"onboarding_title_2" = "نقرة واحدة للبدء";
+"onboarding_content_2" = "اختر من بين كرة القدم أو كرة السلة أو الكريكيت أو التنس — وابدأ على الفور بما تحب.";
+
+"onboarding_title_3" = "كل شيء في مكان واحد";
+"onboarding_content_3" = "استعرض جميع الدوريات…\n\nاطّلع على المباريات المرتقبة والنتائج الأخيرة بنظرة سريعة…\n\nتعمّق في تفاصيل الفرق مع المدربين وقوائم اللاعبين.";
+
+"onboarding_title_4" = "لا تفوّت أي لحظة";
+"onboarding_content_4" = "انقر على ❤️ لحفظ أي دوري للوصول السريع — حتى عندما تكون غير متصل بالإنترنت.*\n\n\n*(تفاصيل المباريات تتطلب اتصالاً بالإنترنت)";
+
+"onboarding_next" = "التالي";
+"onboarding_last" = "هيا بنا!";
+
+
+// Team
+// -----
+
+// ConcreteTeamsRemoteDataSource:
+"error_tennis_not_supported" = "جلب الفرق للتنس غير مدعوم من قبل واجهة برمجة التطبيقات.";
+"section_coaches" = "المدربون";
+"section_players" = "اللاعبون";

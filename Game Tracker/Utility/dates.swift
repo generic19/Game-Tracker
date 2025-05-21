@@ -11,6 +11,7 @@ extension DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = .gmt
+        dateFormatter.locale = Locale(identifier: "en")
         return dateFormatter
     }
     
@@ -18,6 +19,7 @@ extension DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         dateFormatter.timeZone = .gmt
+        dateFormatter.locale = Locale(identifier: "en")
         return dateFormatter
     }
     

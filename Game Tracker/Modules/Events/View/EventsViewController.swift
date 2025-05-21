@@ -240,9 +240,9 @@ extension EventsViewController: UICollectionViewDelegate {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionTitleCollectionViewCell", for: indexPath) as! SectionTitleCollectionViewCell
         
         cell.lblTitle.text = switch section {
-            case .upcomingEvents: "Upcoming Events"
-            case .recentEvents: "Recent Events"
-            case .teams: "Teams"
+            case .upcomingEvents: NSLocalizedString("section_upcomingEvents", comment: "Section title")
+            case .recentEvents: NSLocalizedString("section_recentEvents", comment: "Section title")
+            case .teams: NSLocalizedString("section_teams", comment: "Section title")
             default: nil
         }
         
@@ -278,7 +278,10 @@ extension EventsViewController: EventsView {
         activityIndicator.stopAnimating()
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("action_okay", comment: "Alert okay action"),
+            style: .default
+        ))
         present(alert, animated: true)
     }
     
@@ -286,4 +289,3 @@ extension EventsViewController: EventsView {
         router.navigateToTeam(with: navigationController!, team: team)
     }
 }
-

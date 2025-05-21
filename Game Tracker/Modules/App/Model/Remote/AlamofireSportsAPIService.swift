@@ -86,6 +86,7 @@ class AlamofireSportsAPIService: SportsAPIService {
                     fetchResult = .success(response.result ?? [])
                     
                 case .failure(let error):
+                    let error = error.asAFError?.underlyingError ?? error
                     fetchResult = .failure(error)
             }
             semaphore.signal()

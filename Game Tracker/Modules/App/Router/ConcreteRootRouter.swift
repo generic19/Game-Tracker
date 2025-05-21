@@ -49,7 +49,7 @@ class ConcreteRootRouter: RootRouter, SplashRouter, OnboardingRouter {
         let sportsNavController = UINavigationController(rootViewController: sportsViewController)
         
         sportsNavController.tabBarItem = UITabBarItem(
-            title: "Sports",
+            title: NSLocalizedString("sports", comment: "Sports tab"),
             image: UIImage(systemName: "soccerball"),
             tag: 0
         )
@@ -59,7 +59,7 @@ class ConcreteRootRouter: RootRouter, SplashRouter, OnboardingRouter {
         let leaguesNavController = UINavigationController(rootViewController: leaguesViewController)
         
         leaguesNavController.tabBarItem = UITabBarItem(
-            title: "Favorites",
+            title: NSLocalizedString("favorites", comment: "Favorites tab"),
             image: UIImage(systemName: "heart.fill"),
             tag: 1
         )

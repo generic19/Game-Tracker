@@ -1,0 +1,51 @@
+
+/* Class = "UIBarButtonItem"; title = "Favorite"; ObjectID = "1cb-zV-gmB"; */
+"1cb-zV-gmB.title" = "المفضلة";
+
+/* Class = "UIViewController"; title = "League Events"; ObjectID = "3Pu-Zh-Pmh"; */
+"3Pu-Zh-Pmh.title" = "أحداث الدوري";
+
+/* Class = "UILabel"; text = "Details"; ObjectID = "7wx-uW-Wjn"; */
+"7wx-uW-Wjn.text" = "تفاصيل";
+
+/* Class = "UINavigationItem"; title = "League Name"; ObjectID = "8s8-Xb-JX1"; */
+"8s8-Xb-JX1.title" = "اسم الدوري";
+
+/* Class = "UILabel"; text = "Page Title"; ObjectID = "BTA-fa-WkH"; */
+"BTA-fa-WkH.text" = "عنوان الصفحة";
+
+/* Class = "UICollectionViewController"; title = "Sports"; ObjectID = "L1X-Zk-i8g"; */
+"L1X-Zk-i8g.title" = "الرياضات";
+
+/* Class = "UINavigationItem"; title = "Sports"; ObjectID = "L5B-vt-OIh"; */
+"L5B-vt-OIh.title" = "الرياضات";
+
+/* Class = "UILabel"; text = "Sport"; ObjectID = "TdQ-wd-Js2"; */
+"TdQ-wd-Js2.text" = "الرياضة";
+
+/* Class = "UILabel"; text = "League Name"; ObjectID = "ZMe-h6-wjp"; */
+"ZMe-h6-wjp.text" = "اسم الدوري";
+
+/* Class = "UILabel"; text = "Team Name"; ObjectID = "bbw-vD-I4c"; */
+"bbw-vD-I4c.text" = "اسم الفريق";
+
+/* Class = "UIViewController"; title = "Team"; ObjectID = "gMC-g1-mnN"; */
+"gMC-g1-mnN.title" = "الفريق";
+
+/* Class = "UIButton"; configuration.title = "Next"; ObjectID = "gVD-UF-Cez"; */
+"gVD-UF-Cez.configuration.title" = "التالي";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "gVD-UF-Cez"; */
+"gVD-UF-Cez.normalTitle" = "زر";
+
+/* Class = "UIViewController"; title = "Splash"; ObjectID = "jHi-xB-c4b"; */
+"jHi-xB-c4b.title" = "شاشة البداية";
+
+/* Class = "UILabel"; text = "Person Name"; ObjectID = "rCg-T5-uec"; */
+"rCg-T5-uec.text" = "اسم الشخص";
+
+/* Class = "UILabel"; text = "League Category"; ObjectID = "tiV-hH-qLr"; */
+"tiV-hH-qLr.text" = "فئة الدوري";
+
+/* Class = "UILabel"; text = "Role"; ObjectID = "vHb-nu-SkO"; */
+"vHb-nu-SkO.text" = "الدور";

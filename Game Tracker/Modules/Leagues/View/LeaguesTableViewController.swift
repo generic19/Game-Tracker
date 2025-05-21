@@ -74,7 +74,7 @@ extension LeaguesTableViewController: LeaguesView {
         aiLeagues.stopAnimating()
         
         navigationItem.title = switch cached {
-            case true: "\(presenter.title) (Cached)"
+            case true: NSLocalizedString("format_cached", comment: "Leagues controller")
             case false: presenter.title
             default: navigationItem.title
         }
@@ -87,7 +87,10 @@ extension LeaguesTableViewController: LeaguesView {
         aiLeagues.stopAnimating()
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("action_okay", comment: "Leagues controller"),
+            style: .default
+        ))
         present(alert, animated: true)
     }
     

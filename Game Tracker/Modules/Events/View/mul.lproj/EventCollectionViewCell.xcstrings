@@ -1,0 +1,72 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "DKH-P3-Ww1.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"vs.\"; ObjectID = \"DKH-P3-Ww1\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ضد"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "vs."
+          }
+        }
+      }
+    },
+    "fdG-MN-FeL.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Home\"; ObjectID = \"fdG-MN-FeL\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Home"
+          }
+        }
+      }
+    },
+    "hMI-SQ-T9o.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"31/12/2024\"; ObjectID = \"hMI-SQ-T9o\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "31/12/2024"
+          }
+        }
+      }
+    },
+    "IJm-wx-kWr.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Away\"; ObjectID = \"IJm-wx-kWr\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Away"
+          }
+        }
+      }
+    },
+    "og8-nX-HUR.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"12:30 PM\"; ObjectID = \"og8-nX-HUR\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "12:30 PM"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

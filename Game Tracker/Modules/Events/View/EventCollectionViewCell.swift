@@ -44,7 +44,7 @@ class EventCollectionViewCell: UICollectionViewCell {
             lblSubtitle.text = if let datetime = event.datetime {
                 dateFormatter.string(from: datetime)
             } else {
-                "Finished"
+                NSLocalizedString("Finished", comment: "Default string for date")
             }
         } else if event.datetime != nil {
             lblTitle.text = timeFormatter.string(from: event.datetime!)

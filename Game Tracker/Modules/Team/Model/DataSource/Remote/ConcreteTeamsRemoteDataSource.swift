@@ -38,7 +38,7 @@ class ConcreteTeamsRemoteDataSource: TeamsRemoteDataSource {
                     domain: "ConcreteTeamsRemoteDataSource",
                     code: -1,
                     userInfo: [
-                        NSLocalizedDescriptionKey: "Fetching teams for tennis is not supported by the API."
+                        NSLocalizedDescriptionKey: NSLocalizedString("error_tennis_not_supported", comment: "Teams data source error")
                     ]
                 ))
         }

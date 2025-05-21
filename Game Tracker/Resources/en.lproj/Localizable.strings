@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  Game Tracker
+
+  Created by Basel Alasadi on 21/05/2025.
+  
+*/
+
+"sports" = "Sports";
+"favorites" = "Favorites";
+"action_okay" = "Okay";
+
+
+// Events
+//--------
+
+// EventsPresenter:
+"error_fetch_title" = "Could not fetch: %@";
+"error_set_favorite_title" = "Could not set league favorite state";
+"context_upcoming_events" = "upcoming events";
+"context_recent_events" = "recent events";
+"context_teams" = "teams";
+
+// EventCollectionViewCell:
+"event_finished" = "Finished";
+
+// EventsViewController:
+"section_upcomingEvents" = "Upcoming Events";
+"section_recentEvents" = "Recent Events";
+"section_teams" = "Teams";
+
+
+// Leagues
+// --------
+
+// LeaguesPresenter:
+"sport_football" = "Football";
+"sport_basketball" = "Basketball";
+"sport_cricket" = "Cricket";
+"sport_tennis" = "Tennis";
+"favorite" = "Favorite";
+"format_title" = "%@ Leagues";
+"format_league_error_sport" = "Could not get leagues for %@.";
+"league_error_favorite" = "Could not get your favorite leagues.";
+"league_error_set_favorite" = "Could not change league favorite status.";
+"error_connectivity_title" = "Not connected";
+"error_connectivity_message" = "Cannot display league details without a network connection.";
+
+// LeaguesTableViewController:
+"format_cached" = "%@ (Cached)";
+
+
+// Onboarding
+// -----------
+
+// OnboardingViewController:
+
+"onboarding_title_1" = "Your all-in-one sports companion";
+"onboarding_content_1" = "Follow football, basketball, cricket and tennis leagues from kickoff to final whistle.";
+
+"onboarding_title_2" = "Single tap to get started";
+"onboarding_content_2" = "Choose from Football, Basketball, Cricket or Tennis—and jump straight into the action for whichever you love.";
+
+"onboarding_title_3" = "Everything in one place";
+"onboarding_content_3" = "Browse every league...\n\nSee upcoming fixtures and recent results at a glance...\n\nDive into team details with coaches and player rosters.";
+
+"onboarding_title_4" = "Never miss a beat";
+"onboarding_content_4" = "Tap the ❤️ to save any league for quick access—even when you’re offline.*\n\n\n*(Match details require an internet connection)";
+
+"onboarding_next" = "Next";
+"onboarding_last" = "Let's Go!";
+
+
+// Team
+// -----
+
+// ConcreteTeamsRemoteDataSource:
+
+"error_tennis_not_supported" = "Fetching teams for tennis is not supported by the API.";
+"section_coaches" = "Coaches";
+"section_players" = "Players";

@@ -17,29 +17,26 @@ class OnboardingViewController: UIPageViewController {
         let items = [
             (
                 UIImage(named: "onboarding-1")!,
-                "Your all-in-one sports companion",
-                "Follow football, basketball, cricket and tennis leagues from kickoff to final whistle.",
+                NSLocalizedString("onboarding_title_1", comment: "Onboarding content"),
+                NSLocalizedString("onboarding_content_1", comment: "Onboarding content"),
                 false
             ),
             (
                 UIImage(named: "onboarding-2")!,
-                "Single tap to get started",
-                "Choose from Football, Basketball, Cricket or Tennis—and jump straight into the action for whichever you love.",
+                NSLocalizedString("onboarding_title_2", comment: "Onboarding content"),
+                NSLocalizedString("onboarding_content_2", comment: "Onboarding content"),
                 false
             ),
             (
                 UIImage(named: "onboarding-3")!,
-                "Everything in one place",
-                "Browse every league...\n\n" +
-                "See upcoming fixtures and recent results at a glance...\n\n" +
-                "Dive into team details with coaches and player rosters.",
+                NSLocalizedString("onboarding_title_3", comment: "Onboarding content"),
+                NSLocalizedString("onboarding_content_3", comment: "Onboarding content"),
                 false
             ),
             (
                 UIImage(named: "onboarding-4")!,
-                "Never miss a beat",
-                "Tap the ❤️ to save any league for quick access—even when you’re offline.*\n\n\n" +
-                "*(Match details require an internet connection)",
+                NSLocalizedString("onboarding_title_4", comment: "Onboarding content"),
+                NSLocalizedString("onboarding_content_4", comment: "Onboarding content"),
                 true
             ),
         ]
@@ -51,7 +48,11 @@ class OnboardingViewController: UIPageViewController {
             controller.pageImage = image
             controller.pageTitle = title
             controller.pageDetails = details
-            controller.buttonText = if lastPage { "Let's Go!" } else { "Next" }
+            controller.buttonText = if lastPage {
+                NSLocalizedString("onboarding_last", comment: "Onboarding button")
+            } else {
+                NSLocalizedString("onboarding_next", comment: "Onboarding button")
+            }
             
             return controller
         })

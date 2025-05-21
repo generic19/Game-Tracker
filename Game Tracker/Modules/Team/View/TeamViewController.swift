@@ -87,8 +87,8 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
         let section = sections[sectionIndex]
         return switch section {
             case .header: nil
-            case .coaches: "Coaches"
-            case .players: "Players"
+            case .coaches: NSLocalizedString("section_coaches", comment: "Team section name")
+            case .players: NSLocalizedString("section_players", comment: "Team section name")
         }
     }
 }

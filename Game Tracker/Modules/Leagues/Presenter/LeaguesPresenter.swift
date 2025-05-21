@@ -37,10 +37,13 @@ class LeaguesPresenter {
     
     var title: String {
         let name = switch mode {
-            case .sport(let sport): sport.rawValue.capitalized
-            case .favorites: "Favorite"
+            case .sport(let sport): sport.localizedName
+            case .favorites: NSLocalizedString("favorite", comment: "For title")
         }
-        return "\(name) Leagues"
+        return String(
+            format: NSLocalizedString("format_title", comment: "For title"),
+            name
+        )
     }
     
     init(
@@ -74,7 +77,13 @@ class LeaguesPresenter {
                                 self.view?.showLeagues(leagues, sport: sport, cached: true)
                                 
                             case .failure(let error):
-                                self.view?.showError(title: "Could not get leagues for \(sport).", message: error.localizedDescription)
+                                self.view?.showError(
+                                    title: String(
+                                        format: NSLocalizedString("format_league_error_sport", comment: "League error"),
+                                        sport.localizedName
+                                    ),
+                                    message: error.localizedDescription
+                                )
                         }
                     }
                 }
@@ -87,7 +96,10 @@ class LeaguesPresenter {
                                 self?.view?.showLeagues(leagues, sport: nil, cached: false)
                                 
                             case .failure(let error):
-                                self?.view?.showError(title: "Could not get your favorite leagues.", message: error.localizedDescription)
+                                self?.view?.showError(
+                                    title: NSLocalizedString("league_error_favorite", comment: "League error"),
+                                    message: error.localizedDescription
+                                )
                         }
                     }
                 }
@@ -117,7 +129,10 @@ class LeaguesPresenter {
                         
                     case .failure(let error):
                         completionHandler?(false)
-                        self?.view?.showError(title: "Could not change league favorite status.", message: error.localizedDescription)
+                        self?.view?.showError(
+                            title: NSLocalizedString("league_error_set_favorite", comment: "League error"),
+                            message: error.localizedDescription
+                        )
                 }
             }
         }
@@ -127,7 +142,10 @@ class LeaguesPresenter {
         if networkStatusProvider.isConnected {
             view?.navigateToLeagueDetails(league)
         } else {
-            view?.showError(title: "Not connected", message: "Cannot display league details without a network connection.")
+            view?.showError(
+                title: NSLocalizedString("error_connectivity_title", comment: "League error"),
+                message: NSLocalizedString("error_connectivity_message", comment: "League error")
+            )
         }
     }
 }

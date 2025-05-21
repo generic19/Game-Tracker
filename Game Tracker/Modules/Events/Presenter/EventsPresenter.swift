@@ -69,25 +69,40 @@ class EventsPresenter {
                 
                 switch upcomingResult! {
                     case .success(let events): self.view?.showUpcomingEvents(events)
-                    case .failure(let error): errors.append(("upcoming events", error.localizedDescription))
+                    case .failure(let error): errors.append((
+                        NSLocalizedString("context_upcoming_events", comment: "Error context"),
+                        error.localizedDescription
+                    ))
                 }
                 
                 switch recentResult! {
                     case .success(let events): self.view?.showRecentEvents(events)
-                    case .failure(let error): errors.append(("recent events", error.localizedDescription))
+                    case .failure(let error): errors.append((
+                        NSLocalizedString("context_recent_events", comment: "Error context"),
+                        error.localizedDescription
+                    ))
                 }
                 
                 if league.sport != .tennis {
                     switch teamsResult! {
                         case .success(let teams): self.view?.showTeams(teams)
-                        case .failure(let error): errors.append(("teams", error.localizedDescription))
+                        case .failure(let error): errors.append((
+                            NSLocalizedString("context_teams", comment: "Error context"),
+                            error.localizedDescription
+                        ))
                     }
                 }
                 
                 if !errors.isEmpty {
                     let joinedErrors = errors.compactMap({ $0.0 }).joined(separator: ", ")
                     
-                    let title = "Could not fetch: \(joinedErrors)"
+                    let title = String(
+                        format: NSLocalizedString(
+                            "error_fetch_title",
+                            comment: "Fetch errors title; %@ = error contexts"
+                        ),
+                        joinedErrors
+                    )
                     let message = errors
                         .compactMap({ "\($0.0.capitalized): \($0.1)" })
                         .joined(separator: "\n\n")
@@ -109,7 +124,13 @@ class EventsPresenter {
                     
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        self.view?.showError(title: "Could not set league favorite state", message: error.localizedDescription)
+                        self.view?.showError(
+                            title: NSLocalizedString(
+                                "error_set_favorite_title",
+                                comment: "Toggle favorite error title"
+                            ),
+                            message: error.localizedDescription
+                        )
                     }
             }
         }
