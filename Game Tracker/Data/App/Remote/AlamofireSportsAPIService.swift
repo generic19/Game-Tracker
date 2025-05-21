@@ -6,8 +6,6 @@
 //
 import Alamofire
 
-typealias RemoteDTO = Decodable & Sendable & ModelConvertible
-
 private struct APISuccessResponse<T: RemoteDTO>: Decodable & Sendable {
     let success: Int
     let result: [T]?
@@ -63,19 +61,6 @@ class AlamofireSportsAPIService: SportsAPIService {
         return fetch(as: type, url: url)
     }
     
-    func fetchTeam<T: RemoteDTO>(
-        as type: T.Type,
-        sport: Sport,
-        teamId: Int
-    ) -> Result<[any ModelConvertible], Error> {
-        let url = API_BASE.with(path: sport.rawValue, params: [
-            "met": "Teams",
-            "teamId": "\(teamId)",
-        ])
-        
-        return fetch(as: type, url: url)
-    }
-    
     private func fetch<T: RemoteDTO>(as type: T.Type, url: URL) -> Result<[any ModelConvertible], Error> {
         var fetchResult: Result<[any ModelConvertible], Error>!
         let semaphore = DispatchSemaphore(value: 0)
@@ -96,4 +81,3 @@ class AlamofireSportsAPIService: SportsAPIService {
         return fetchResult
     }
 }
-

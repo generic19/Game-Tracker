@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "9DAB7368-CF27-40E1-B244-2DB65C61C240",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Game Tracker.xcodeproj",
+      "identifier" : "FBE663642DCE7272005853ED",
+      "name" : "Game Tracker"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Game Tracker.xcodeproj",
+        "identifier" : "FBE6637D2DCE7274005853ED",
+        "name" : "Game TrackerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

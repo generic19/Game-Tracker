@@ -68,11 +68,6 @@
 			path = "Game TrackerTests";
 			sourceTree = "<group>";
 		};
-		FBE6638B2DCE7274005853ED /* Game TrackerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Game TrackerUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +126,6 @@
 			children = (
 				FBE663672DCE7272005853ED /* Game Tracker */,
 				FBE663812DCE7274005853ED /* Game TrackerTests */,
-				FBE6638B2DCE7274005853ED /* Game TrackerUITests */,
 				FBE663662DCE7272005853ED /* Products */,
 				58AC54B6921348833ED40276 /* Pods */,
 				3E98F756FC0121CA89A3A999 /* Frameworks */,
@@ -209,9 +203,6 @@
 			);
 			dependencies = (
 				FBE6638A2DCE7274005853ED /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				FBE6638B2DCE7274005853ED /* Game TrackerUITests */,
 			);
 			name = "Game TrackerUITests";
 			productName = "Game TrackerUITests";

@@ -6,6 +6,8 @@
 //
 import Foundation
 
+typealias RemoteDTO = Decodable & Sendable & ModelConvertible
+
 protocol SportsAPIService {
     func fetchLeagues<T: RemoteDTO>(
         as type: T.Type,
@@ -24,11 +26,5 @@ protocol SportsAPIService {
         as type: T.Type,
         sport: Sport,
         leagueId: Int,
-    ) -> Result<[any ModelConvertible], Error>
-    
-    func fetchTeam<T: RemoteDTO>(
-        as type: T.Type,
-        sport: Sport,
-        teamId: Int,
     ) -> Result<[any ModelConvertible], Error>
 }
