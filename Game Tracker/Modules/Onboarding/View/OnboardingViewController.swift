@@ -15,10 +15,33 @@ class OnboardingViewController: UIPageViewController {
         super.viewDidLoad()
         
         let items = [
-            (UIImage(systemName: "photo")!, "Welcome", "Follow your favorite sport.", false),
-            (UIImage(systemName: "photo")!, "Leagues", "Explore matches by league.", false),
-            (UIImage(systemName: "photo")!, "Teams", "Track your favorite teams.", false),
-            (UIImage(systemName: "photo")!, "Players", "Check on the players of your favorite team.", true),
+            (
+                UIImage(named: "onboarding-1")!,
+                "Your all-in-one sports companion",
+                "Follow football, basketball, cricket and tennis leagues from kickoff to final whistle.",
+                false
+            ),
+            (
+                UIImage(named: "onboarding-2")!,
+                "Single tap to get started",
+                "Choose from Football, Basketball, Cricket or Tennis—and jump straight into the action for whichever you love.",
+                false
+            ),
+            (
+                UIImage(named: "onboarding-3")!,
+                "Everything in one place",
+                "Browse every league...\n\n" +
+                "See upcoming fixtures and recent results at a glance...\n\n" +
+                "Dive into team details with coaches and player rosters.",
+                false
+            ),
+            (
+                UIImage(named: "onboarding-4")!,
+                "Never miss a beat",
+                "Tap the ❤️ to save any league for quick access—even when you’re offline.*\n\n\n" +
+                "*(Match details require an internet connection)",
+                true
+            ),
         ]
         
         pages = items.map({ (image, title, details, lastPage) in
