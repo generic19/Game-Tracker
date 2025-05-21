@@ -14,6 +14,8 @@ class OnboardingViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.ShouldShowOnboarding)
+        
         let items = [
             (
                 UIImage(named: "onboarding-1")!,

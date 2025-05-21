@@ -34,7 +34,7 @@ class SplashViewController: UIViewController, SplashView {
         queuePlayer.play()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-            self?.router.showOnboarding()
+            self?.presenter.videoDone()
         }
     }
     
