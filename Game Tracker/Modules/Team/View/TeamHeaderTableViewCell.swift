@@ -13,7 +13,7 @@ class TeamHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lblName: UILabel!
  
     func configure(with team: Team) {
-        ivLogo.sd_setImage(with: team.image)
+        ivLogo.sd_setImage(with: team.image, placeholderImage: UIImage(named: "placeholder-team"))
         lblName.text = team.name
     }
 }

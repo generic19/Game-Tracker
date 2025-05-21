@@ -28,8 +28,13 @@ class EventCollectionViewCell: UICollectionViewCell {
         lblHome.text = event.firstParticipant.name
         lblAway.text = event.secondParticipant.name
         
-        ivHome.sd_setImage(with: event.firstParticipant.image)
-        ivAway.sd_setImage(with: event.secondParticipant.image)
+        let placeholder = switch event.firstParticipant {
+            case .team: UIImage(named: "placeholder-team")
+            case .player: UIImage(named: "placeholder-person")
+        }
+        
+        ivHome.sd_setImage(with: event.firstParticipant.image, placeholderImage: placeholder)
+        ivAway.sd_setImage(with: event.secondParticipant.image, placeholderImage: placeholder)
         
         ivHome.layer.cornerRadius = ivHome.frame.width / 2
         ivAway.layer.cornerRadius = ivAway.frame.width / 2

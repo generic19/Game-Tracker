@@ -10,6 +10,7 @@ class EventsViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnFavorite: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var presenter: EventsPresenter!
     var router: EventsRouter!
@@ -38,6 +39,7 @@ class EventsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.startAnimating()
         navigationItem.title = presenter.league.name
         btnFavorite.image = UIImage(systemName: presenter.league.isFavorite ? "heart.fill" : "heart")
         
@@ -255,21 +257,26 @@ extension EventsViewController: EventsView {
     }
     
     func showUpcomingEvents(_ events: [Event]) {
+        activityIndicator.stopAnimating()
         upcomingEvents = events
         collectionView.reloadData()
     }
     
     func showRecentEvents(_ events: [Event]) {
+        activityIndicator.stopAnimating()
         recentEvents = events
         collectionView.reloadData()
     }
     
     func showTeams(_ teams: [Team]) {
+        activityIndicator.stopAnimating()
         self.teams = teams
         collectionView.reloadData()
     }
     
     func showError(title: String, message: String) {
+        activityIndicator.stopAnimating()
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(alert, animated: true)

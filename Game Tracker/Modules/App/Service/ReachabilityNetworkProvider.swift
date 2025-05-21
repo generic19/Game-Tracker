@@ -8,9 +8,17 @@
 import Reachability
 
 class ReachabilityNetworkStatusProvider: NetworkStatusProvider {
-    let reachablility = try! Reachability()
-    
+    private let reachablility = try! Reachability()
+
     var isConnected: Bool {
         reachablility.connection != .unavailable
+    }
+    
+    init() {
+        try! reachablility.startNotifier()
+    }
+    
+    deinit {
+        reachablility.stopNotifier()
     }
 }

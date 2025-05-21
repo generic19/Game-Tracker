@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="130" height="160"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g2b-py-ZkQ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-team" translatesAutoresizingMaskIntoConstraints="NO" id="g2b-py-ZkQ">
                         <rect key="frame" x="21.666666666666664" y="16" width="86.666666666666686" height="86.666666666666671"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="g2b-py-ZkQ" secondAttribute="height" multiplier="1:1" id="lMJ-x4-KrP"/>
@@ -47,4 +47,7 @@
             <point key="canvasLocation" x="201.52671755725191" y="58.802816901408455"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="placeholder-team" width="1024" height="1024"/>
+    </resources>
 </document>

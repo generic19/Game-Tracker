@@ -19,7 +19,7 @@ class LeagueTableViewCell: UITableViewCell {
     
     func configure(with league: League) {
         lblLeague.text = league.name
-        ivLeague.sd_setImage(with: league.logo)
+        ivLeague.sd_setImage(with: league.logo, placeholderImage: UIImage(named: "placeholder-league"))
         
         if let categoryName = league.categoryName {
             lblCategory.text = categoryName

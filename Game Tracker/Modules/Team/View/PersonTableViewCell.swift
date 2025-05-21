@@ -16,7 +16,7 @@ class PersonTableViewCell: UITableViewCell {
     
     func configure(with person: Person) {
         lblName.text = person.name
-        ivPhoto.sd_setImage(with: person.image)
+        ivPhoto.sd_setImage(with: person.image, placeholderImage: UIImage(named: "placeholder-person"))
         
         if let role = person.role {
             lblRole.text = role

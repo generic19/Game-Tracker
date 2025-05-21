@@ -24,7 +24,7 @@ class LeagueHeaderCollectionViewCell: UICollectionViewCell {
         lblName.text = league.name
         lblCategory.text = league.categoryName
         
-        ivLogo.sd_setImage(with: league.logo)
+        ivLogo.sd_setImage(with: league.logo, placeholderImage: UIImage(named: "placeholder-league"))
         ivLogo.layer.cornerRadius = ivLogo.frame.width / 2
         
         if let categoryLogo = league.categoryLogo {

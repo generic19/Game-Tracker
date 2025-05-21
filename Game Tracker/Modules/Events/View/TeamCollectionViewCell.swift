@@ -19,7 +19,7 @@ class TeamCollectionViewCell: UICollectionViewCell {
     
     func configure(with team: Team) {
         lblName.text = team.name
-        ivLogo.sd_setImage(with: team.image)
+        ivLogo.sd_setImage(with: team.image, placeholderImage: UIImage(named: "placeholder-team"))
         ivLogo.layer.cornerRadius = ivLogo.frame.width / 2
     }
 }

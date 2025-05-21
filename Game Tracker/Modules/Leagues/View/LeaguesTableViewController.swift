@@ -8,6 +8,9 @@
 import UIKit
 
 class LeaguesTableViewController: UITableViewController {
+    
+    @IBOutlet weak var aiLeagues: UIActivityIndicatorView!
+    
     var presenter: LeaguesPresenter!
     var router: LeaguesRouter!
     
@@ -18,6 +21,7 @@ class LeaguesTableViewController: UITableViewController {
         
         navigationItem.title = presenter.title
         tableView.rowHeight = 70
+        aiLeagues.startAnimating()
         
         presenter.loadLeagues()
     }
@@ -67,6 +71,8 @@ class LeaguesTableViewController: UITableViewController {
 
 extension LeaguesTableViewController: LeaguesView {
     func showLeagues(_ leagues: [League], sport: Sport?, cached: Bool?) {
+        aiLeagues.stopAnimating()
+        
         navigationItem.title = switch cached {
             case true: "\(presenter.title) (Cached)"
             case false: presenter.title
@@ -78,6 +84,8 @@ extension LeaguesTableViewController: LeaguesView {
     }
     
     func showError(title: String, message: String) {
+        aiLeagues.stopAnimating()
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(alert, animated: true)
